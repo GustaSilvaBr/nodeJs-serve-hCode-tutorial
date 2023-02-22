@@ -12,15 +12,10 @@ module.exports = (app)=>{
         db.find({}).sort({name:1}).exec((err, users)=>{
         
             if(err){
-                console.log(`error: ${err}`);
-                res.status(400).json({
-                    error:err,
-                });
+                app.utils.error.send(err, req, res);
             }else{
-    
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
-    
                 res.status(200).json({users})
             }
     
@@ -29,18 +24,15 @@ module.exports = (app)=>{
 
     
     app.post('/users', (req, res)=>{
-        
 
         db.insert(req.body, (err, user)=>{
             if(err){
-                res.status(400).json({
-                    err:err,
-                });
+                app.utils.error.send(err, req, res)
             }else{
                 res.status(200).json(user);
             }
         });
-
+        
     });
     
 }/*as consing said, this file will be put into the app,
