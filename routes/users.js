@@ -6,13 +6,14 @@ let db = new NeDB({
 
 module.exports = (app)=>{
 
+    const route = app.route('/users');
 
-    app.get('/users', (req, res)=>{
+    route.get((req, res)=>{
 
         db.find({}).sort({name:1}).exec((err, users)=>{
         
             if(err){
-                app.utils.error.send(err, req, res);
+                route.utils.error.send(err, req, res);
             }else{
                 res.statusCode = 200;
                 res.setHeader('Content-Type', 'application/json');
@@ -23,16 +24,16 @@ module.exports = (app)=>{
     });
 
     
-    app.post('/users', (req, res)=>{
+    route.post((req, res)=>{
 
         db.insert(req.body, (err, user)=>{
             if(err){
-                app.utils.error.send(err, req, res)
+                route.utils.error.send(err, req, res)
             }else{
                 res.status(200).json(user);
             }
         });
-        
+
     });
     
 }/*as consing said, this file will be put into the app,
