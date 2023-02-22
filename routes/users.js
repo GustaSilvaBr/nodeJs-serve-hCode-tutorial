@@ -13,12 +13,10 @@ module.exports = (app)=>{
     });
     
     
-    app.get('/users/admin', (req, res)=>{
-        res.statusCode= 200;
-        res.setHeader('Content-Type', 'application/json');
-        res.json({
-            users: []
-        });
+    app.post('/users', (req, res)=>{
+        console.log(req.body);
+        res.json(req.body);
+
     });
     
 }/*as consing said, this file will be put into the app,
