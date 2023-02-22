@@ -49,6 +49,18 @@ module.exports = (app)=>{
         });
 
     });
+
+    routeId.put((req, res)=>{
+
+        db.update({_id: req.params.id}, req.body, err=>{
+            if(err){
+                app.utils.error.send(err, req, res);
+            }else{
+                res.status(200).json(Object.assign(req.params, req.body));
+            }
+        });
+
+    });
     
 }/*as consing said, this file will be put into the app,
    so, the app "will come here" to get it.
