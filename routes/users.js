@@ -1,3 +1,4 @@
+const {check, validationResult} = require('express-validator');
 let NeDB = require('nedb');
 let db = new NeDB({
     filename:'users.db',
@@ -9,6 +10,8 @@ module.exports = (app)=>{
     const route = app.route('/users');
 
     route.get((req, res)=>{
+
+
 
         db.find({}).sort({name:1}).exec((err, users)=>{
         
@@ -23,7 +26,15 @@ module.exports = (app)=>{
     });
 
     
-    route.post((req, res)=>{
+    route.post([
+        check('username', 'invalid email').isEmail(),
+        check('password', 'min passwords characteres: 5').isLength({min:5}),
+    ],(req, res)=>{
+
+        const errors = validationResult(req);
+        if(!errors.isEmpty()){
+            return app.utils.error.send(errors, req, res);
+        }
 
         db.insert(req.body, (err, user)=>{
             if(err){
