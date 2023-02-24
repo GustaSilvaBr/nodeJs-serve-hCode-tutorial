@@ -1,4 +1,3 @@
-const {check, validationResult} = require('express-validator');
 let NeDB = require('nedb');
 let db = new NeDB({
     filename:'users.db',
@@ -26,24 +25,18 @@ module.exports = (app)=>{
     });
 
     
-    route.post([
-        check('username', 'invalid email').isEmail(),
-        check('password', 'min passwords characteres: 5').isLength({min:5}),
-    ],(req, res)=>{
+    route.post(app.utils.validator.checkFields(),(req, res)=>{
 
-        const errors = validationResult(req);
-        if(!errors.isEmpty()){
-            return app.utils.error.send(errors, req, res);
+        if(app.utils.validator.reportFieldsValidation(app, req, res)){
+            db.insert(req.body, (err, user)=>{
+                if(err){
+                    app.utils.error.send(err, req, res)
+                }else{
+                    res.status(200).json(user);
+                }
+            });
         }
-
-        db.insert(req.body, (err, user)=>{
-            if(err){
-                app.utils.error.send(err, req, res)
-            }else{
-                res.status(200).json(user);
-            }
-        });
-
+        
     });
 
     const routeId = app.route('/users/:id');
@@ -61,15 +54,17 @@ module.exports = (app)=>{
 
     });
 
-    routeId.put((req, res)=>{
+    routeId.put(app.utils.validator.checkFields(), (req, res)=>{
 
-        db.update({_id: req.params.id}, req.body, err=>{
-            if(err){
-                app.utils.error.send(err, req, res);
-            }else{
-                res.status(200).json(Object.assign(req.params, req.body));
-            }
-        });
+        if(app.utils.validator.reportFieldsValidation(app, req, res)){
+            db.update({_id: req.params.id}, req.body, err=>{
+                if(err){
+                    app.utils.error.send(err, req, res);
+                }else{
+                    res.status(200).json(Object.assign(req.params, req.body));
+                }
+            });
+        }
 
     });
 
