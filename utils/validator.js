@@ -4,8 +4,8 @@ module.exports = {
 
     checkFields:()=>{
         return [
-        check('username', 'invalid email').isEmail(),
-        check('password', 'min passwords characteres: 5').isLength({min:5}),
+        check('_email', 'invalid email').isEmail(),
+        check('_password', 'min passwords characters: 5').isLength({min:5}),
     ]},
 
     reportFieldsValidation:(app, req, res)=>{
