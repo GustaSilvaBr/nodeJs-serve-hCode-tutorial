@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 {"_name":"Ana","_gender":"F","_birth":"2010-03-08","_country":"Brazil","_email":"ana.silva@gmail.com","_password":"54654","_photo":"dist/img/boxed-bg.jpg","_admin":false,"_register":"2023-02-28T01:31:52.147Z","_id":"Zf0SrCEY4lx2jEiq"}
 {"_name":"João","_gender":"M","_birth":"2010-03-08","_country":"Brazil","_email":"joão.santos@gmaail.com","_password":"54654","_photo":"dist/img/boxed-bg.jpg","_admin":false,"_register":"2023-02-28T01:31:52.147Z","_id":"jU7VUPigix5J7riT"}
+=======
+{"_name":"Gustavo","_gender":"M","_birth":"2023-03-21","_country":"Brazil","_email":"larissa-aragao91@keffin.com.br","_password":"74984","_photo":"dist/img/boxed-bg.jpg","_admin":false,"_register":"2023-03-01T09:31:57.742Z","_id":"9ymybGa7dK8ldcai"}
+{"_name":"Clara","_gender":"M","_birth":"2023-03-21","_country":"Brazil","_email":"clara91@keffin.com.br","_password":"74984","_photo":"dist/img/boxed-bg.jpg","_admin":false,"_register":"2023-03-01T09:31:57.742Z","_id":"zTpwulsUNB1HEeBx"}
+>>>>>>> 348dac72851e3e5773658d71657b4b99869e041d
